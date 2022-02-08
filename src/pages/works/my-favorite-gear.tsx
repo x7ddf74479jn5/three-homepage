@@ -13,7 +13,7 @@ const FoodBlog = () => {
           My Favorite Gear <Badge>2021</Badge>
         </Title>
         <Paragraph>
-          自分のお気に入りのアイテムを8つ選んでTwitterに投稿できます。Twitter・アプリケーション・商品サイト（楽天・Amazon）へのスムーズな導線を構築しています。。ご利用にはTwitterアカウントが必要です。
+          自分のお気に入りのアイテムを8つ選んでTwitterに投稿できます。Twitter・アプリケーション・商品サイト（楽天・Amazon）間のスムーズな導線を構築しています。ご利用にはTwitterアカウントが必要です。
         </Paragraph>
         <List ml={4} my={4}>
           <ListItem>

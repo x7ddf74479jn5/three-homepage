@@ -76,7 +76,7 @@ const Page: NextPage = () => {
           </Heading>
           <BioSection>
             <BioYear>2012</BioYear>
-            新卒で大手外食チェーン店に入社
+            新卒で大手外食レストラン企業に入社
           </BioSection>
           <BioSection>
             <BioYear>2017</BioYear>
