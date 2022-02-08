@@ -1,4 +1,4 @@
-export const SharkIcon = (props: any) => (
+export const SharkIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     version='1.1'
     id='Capa_1'
