@@ -1,7 +1,8 @@
 import { HStack, Text, useColorModeValue } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import Image from 'next/image';
 import Link from 'next/link';
+
+import { SharkIcon } from '@/components/icons/shark';
 
 const LogoBox = styled.span`
   font-weight: bold;
@@ -12,7 +13,7 @@ const LogoBox = styled.span`
   line-height: 20px;
   padding: 10px;
 
-  &:hover img {
+  &:hover svg {
     transform: rotate(20deg);
   }
 `;
@@ -23,7 +24,7 @@ export const Logo = () => {
       <a>
         <LogoBox>
           <HStack>
-            <Image src='/images/robot.png' width={20} height={20} alt='logo' />
+            <SharkIcon fill={useColorModeValue('black', 'white')} />
             <Text
               color={useColorModeValue('gray.800', 'whiteAlpha.900')}
               fontFamily='M PLUS Rounded 1c", sans-serif'
