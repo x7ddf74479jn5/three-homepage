@@ -4,8 +4,6 @@ import type { ImageProps } from 'next/image';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { composeImageQueryString } from '@/lib/microcms';
-
 type GridItemProps = {
   href: string;
   title: string;
@@ -14,14 +12,14 @@ type GridItemProps = {
 
 export const GridItem = ({ href, title, thumbnail }: GridItemProps) => {
   const dimensions = { width: '1280', height: '720' };
-  const imagesSrc = `${thumbnail}${composeImageQueryString(dimensions)}`;
-  const blurImageSrc = `${imagesSrc}&q=0`;
+  const imageSrc = `${thumbnail}?${new URLSearchParams(dimensions).toString()};`;
+  const blurImageSrc = `${imageSrc}&q=0`;
 
   return (
     <Box w='100%' align='center'>
       <LinkBox cursor='pointer'>
         <Image
-          src={imagesSrc}
+          src={imageSrc}
           alt={title}
           className='grid-item-thumbnail'
           placeholder='blur'
@@ -47,15 +45,15 @@ type WorkGridItemProps = {
 
 export const WorkGridItem = ({ children, title, id, thumbnail }: WorkGridItemProps) => {
   const dimensions = { width: '1280', height: '720' };
-  const imagesSrc = `${thumbnail}${composeImageQueryString(dimensions)}`;
-  const blurImageSrc = `${imagesSrc}&q=0`;
+  const imageSrc = `${thumbnail}?${new URLSearchParams(dimensions).toString()};`;
+  const blurImageSrc = `${imageSrc}&q=0`;
 
   return (
     <Box w='100%' align='center'>
       <NextLink href={`/works/${id}`}>
         <LinkBox cursor='pointer'>
           <Image
-            src={thumbnail}
+            src={imageSrc}
             alt={title}
             className='grid-item-thumbnail'
             placeholder='blur'
