@@ -2,7 +2,8 @@
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
-  i18n: { locales: ["ja"], defaultLocale: "ja" },
+  images: { domains: ['images.microcms-assets.io'] },
+  i18n: { locales: ['ja'], defaultLocale: 'ja' },
   future: { strictPostcssConfiguration: true },
   reactStrictMode: true,
   poweredByHeader: false,

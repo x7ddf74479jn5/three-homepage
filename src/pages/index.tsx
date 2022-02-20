@@ -11,6 +11,7 @@ import {
   ListItem,
   useColorModeValue,
 } from '@chakra-ui/react';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import type { NextPage } from 'next';
 import NextLink from 'next/link';
 import { IoLogoGithub, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5';
@@ -19,8 +20,12 @@ import { BioSection, BioYear } from '@/components/bio';
 import { ArticleLayout } from '@/components/layouts/article';
 import { Paragraph } from '@/components/paragraph';
 import { Section } from '@/components/section';
+import { fetchProfile } from '@/lib/fetcher';
+import type { Profile } from '@/types';
 
-const Page: NextPage = () => {
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+const Page: NextPage<Props> = ({ profile }) => {
   return (
     <ArticleLayout title='Home'>
       <Container>
@@ -37,9 +42,9 @@ const Page: NextPage = () => {
         <Box display={{ md: 'flex' }}>
           <Box flexGrow={1}>
             <Heading as='h2' variant='page-title'>
-              Pandashark
+              {profile.name}
             </Heading>
-            <p>Frontend Engineer | Cook</p>
+            <p>{profile.occupation}</p>
           </Box>
           <Box flexShrink={0} mt={{ base: 4, md: 0 }} ml={{ md: 6 }} align={'center'}>
             <Image
@@ -49,7 +54,7 @@ const Page: NextPage = () => {
               maxWidth='100px'
               display='inline-block'
               borderRadius='full'
-              src='/images/pandashark_icon.webp'
+              src={profile.avatar.url}
               alt='Profile Image'
             />
           </Box>
@@ -59,9 +64,7 @@ const Page: NextPage = () => {
           <Heading as='h3' variant='section-title'>
             Work
           </Heading>
-          <Paragraph>
-            喫茶店の調理職に従事する傍らフリーランスのフロントエンドエンジニアとして働いています。Reactを用いたフロントエンドの開発が得意です。
-          </Paragraph>
+          <Paragraph>{profile.introduction}</Paragraph>
           <Box align='center' my={4}>
             <NextLink href='/works' passHref>
               <Button rightIcon={<ChevronRightIcon />} colorScheme='teal'>
@@ -96,7 +99,7 @@ const Page: NextPage = () => {
           <Heading as='h3' variant='section-title'>
             I ♥
           </Heading>
-          <Paragraph>Coffee, Tea, Sweets, Watching video game streamings</Paragraph>
+          <Paragraph>{profile.favorites}</Paragraph>
         </Section>
         <Section delay='0,3'>
           <Heading as='h3' variant='section-title'>
@@ -104,23 +107,23 @@ const Page: NextPage = () => {
           </Heading>
           <List>
             <ListItem>
-              <Link href='https://github.com/x7ddf74479jn5' target='_blank'>
+              <Link href={profile.github.url} target='_blank'>
                 <Button variant='ghost' colorScheme='teal' leftIcon={<Icon as={IoLogoGithub} />}>
-                  Pandashark
+                  {profile.github.accountId}
                 </Button>
               </Link>
             </ListItem>
             <ListItem>
-              <Link href='https://twitter.com/pandashark6' target='_blank'>
+              <Link href={profile.twitter.url} target='_blank'>
                 <Button variant='ghost' colorScheme='teal' leftIcon={<Icon as={IoLogoTwitter} />}>
-                  @pandashark6
+                  {profile.twitter.accountId}
                 </Button>
               </Link>
             </ListItem>
             <ListItem>
-              <Link href='https://www.instagram.com/pandashark_/' target='_blank'>
+              <Link href={profile.instagram.url} target='_blank'>
                 <Button variant='ghost' colorScheme='teal' leftIcon={<Icon as={IoLogoInstagram} />}>
-                  @pandashark_
+                  {profile.instagram.accountId}
                 </Button>
               </Link>
             </ListItem>
@@ -136,6 +139,28 @@ const Page: NextPage = () => {
       </Container>
     </ArticleLayout>
   );
+};
+
+type StaticProps = {
+  profile: Profile;
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  try {
+    const profile = await fetchProfile();
+    return {
+      props: {
+        profile,
+      },
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+    }
+    return {
+      notFound: true,
+    };
+  }
 };
 
 export default Page;
