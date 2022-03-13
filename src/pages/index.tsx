@@ -68,7 +68,7 @@ const Page: NextPage<Props> = ({ profile }) => {
           <Box align='center' my={4}>
             <NextLink href='/works' passHref>
               <Button rightIcon={<ChevronRightIcon />} colorScheme='teal'>
-                My portfolio
+                My products
               </Button>
             </NextLink>
           </Box>
