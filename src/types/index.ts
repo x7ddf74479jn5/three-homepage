@@ -16,7 +16,7 @@ export type WorkBase = {
   description: string;
   summary: string;
   thumbnail: MicroCMSImage;
-  year: number;
+  period: string;
   url: string;
   stack: string;
   images?: WorkImage[];
@@ -42,6 +42,7 @@ export type ProfileBase = {
   twitter: Link;
   instagram: Link;
   homepage: Link;
+  portfolio: Link;
 };
 
 export type Work = WorkBase & MicroCMSListContent;

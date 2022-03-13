@@ -12,13 +12,13 @@ import { Work } from '@/types';
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Work: NextPage<Props> = ({ work }) => {
-  const { name, year, description, url, stack, thumbnail } = work;
+  const { name, period, description, url, stack, thumbnail } = work;
 
   return (
     <ArticleLayout title={name}>
       <Container>
         <Title>
-          {name} <Badge>{year}</Badge>
+          {name} <Badge>{period}</Badge>
         </Title>
         <Paragraph>{description}</Paragraph>
         <List ml={4} my={4}>
