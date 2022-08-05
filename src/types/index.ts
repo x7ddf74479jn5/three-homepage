@@ -1,4 +1,9 @@
-import type { MicroCMSImage, MicroCMSListContent, MicroCMSListResponse, MicroCMSObjectContent } from 'microcms-js-sdk';
+import type {
+  MicroCMSImage,
+  MicroCMSListContent,
+  MicroCMSListResponse,
+  MicroCMSObjectContent,
+} from "microcms-js-sdk";
 
 type WorkImage = {
   title: string;
@@ -28,7 +33,7 @@ export type PostBase = {
   description: string;
   url: string;
   media: string;
-  thumbnail: MicroCMSImage;
+  thumbnail: MicroCMSImage | undefined;
 };
 
 export type ProfileBase = {
